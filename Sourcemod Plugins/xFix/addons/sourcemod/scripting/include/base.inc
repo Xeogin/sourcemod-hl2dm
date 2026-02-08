@@ -10,12 +10,6 @@ static bool gWasLateLoaded;
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int errorMaxLen)
 {
-	if (GetEngineVersion() != Engine_HL2DM)
-	{
-		FormatEx(error, errorMaxLen, "[HL2MP] This plugin is intended for Half-Life 2: Deathmatch only.");
-		return APLRes_Failure;
-	}
-
 	gWasLateLoaded = late;
 	return APLRes_Success;
 }

@@ -213,12 +213,12 @@ stock any clamp(any Value, any Min, any Max)
   }
   
   // Fake a coloured message from client to recipient:
-  stock void MC_PrintToChatFrom(int iClient, int iRecipient, bool bTeam, const char[] sFormat, any...)
+  stock void PrintToChatFrom(int iClient, int iRecipient, bool bTeam, const char[] sFormat, any...)
   {
       char sMessage[512];
 
       VFormat(sMessage, sizeof(sMessage), sFormat, 5);
-      MC_PrintToChatEx(iRecipient, iClient, "%s{teamcolor}%N{default} :  %s", IsClientObserver(iClient) ? "*SPEC* " : bTeam ? IsClientObserver(iClient) ? "(Spectator)" : "(TEAM)" : NULL_STRING, iClient, sMessage);
+      PrintToChatEx(iRecipient, iClient, "%s{teamcolor}%N{default} :  %s", IsClientObserver(iClient) ? "*SPEC* " : bTeam ? IsClientObserver(iClient) ? "(Spectator)" : "(TEAM)" : NULL_STRING, iClient, sMessage);
   }
   
   // Fake a coloured message from client to all:
