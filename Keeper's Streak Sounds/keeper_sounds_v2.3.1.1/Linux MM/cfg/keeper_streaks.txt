@@ -1,0 +1,373 @@
+// Keeper's Streak Sounds Plugin TXT streak file
+// This is a keeper_streaks.txt streak file to be uploaded on a HL2dm server at hl2dm/cfg/
+// The lastest version of Keeper's Streak Sounds Plugin at the creation of this TXT was v2.3.1.0
+// Check http://forum.tsgk.com/viewtopic.php?t=3930 for newest version of Keeper's Streak Sounds Plugin
+// TXT Generated the September 25, 2015 at 15:33:41 CEST
+
+"SOUNDS"
+{
+	"DOMINATING"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a is Dominating !!"
+		"sound"		"quake/dominating.mp3"
+		"streak"	"4"
+	}
+	"RAMPAGE"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Rampage !!"
+		"sound"		"quake/rampage.mp3"
+		"streak"	"6"
+	}
+	"KILLINGSPREE"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a is on a Killing Spree !"
+		"sound"		"quake/killingspree.mp3"
+		"streak"	"8"
+	}
+	"MONSTERKILL"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Monster Kill !!"
+		"sound"		"quake/monsterkill.mp3"
+		"streak"	"10"
+	}
+	"UNSTOPPABLE"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a is Unstoppable"
+		"sound"		"quake/unstoppable.mp3"
+		"streak"	"12"
+	}
+	"ULTRAKILL"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Ultra Kill !!"
+		"sound"		"quake/ultrakill.mp3"
+		"streak"	"14"
+	}
+	"GODLIKE"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a is God Like !!"
+		"sound"		"quake/godlike.mp3"
+		"streak"	"16"
+	}
+	"WICKEDSICK"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a is Wicked Sick !!"
+		"sound"		"quake/wickedsick.mp3"
+		"streak"	"18"
+	}
+	"LUDICROUSKILL"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Ludicrous Kill !!!"
+		"sound"		"quake/ludicrouskill.mp3"
+		"streak"	"20"
+	}
+	"HOLYSHIT"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"HOLY SHIT %a !!!"
+		"sound"		"quake/holyshit.mp3"
+		"streak"	"24"
+	}
+	"HEADSHOT"
+	{
+		"eventkey"	"headshot"
+		"type"		"kill"
+		"weapon"	"357"
+		"mode"		"1"
+		"text"		"%a Headshot !!"
+		"sound"		"quake/headshot.mp3"
+		"streak"	"1"
+	}
+	
+	"HEADSHOT"
+	{
+		"eventkey"	"headshot"
+		"type"		"kill"
+		"weapon"	"357"
+		"mode"		"1"
+		"text"		"%a Head Hunter"
+		"sound"		"quake/headhunter.mp3"
+		"streak"	"0"
+	}
+	"FIRST_BLOOD"
+	{
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a got First Blood"
+		"sound"		"quake/firstblood.mp3"
+		"streak"	"0"
+	}
+	"MULTIKILL"
+	{
+		"eventkey"	"multikill2"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Double Kill !!"
+		"sound"		"quake/doublekill.mp3"
+		"streak"	"1"
+	}
+	"MULTIKILL"
+	{
+		"eventkey"	"multikill3"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Triple Kill !!"
+		"sound"		"quake/triplekill.mp3"
+		"streak"	"1"
+	}
+	"MULTIKILL"
+	{
+		"eventkey"	"multikill4"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Quadruple Kill !!"
+		"sound"		"quake/multikill.mp3"
+		"streak"	"1"
+	}
+	"MULTIKILL"
+	{
+		"eventkey"	"multikill5"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Quintuple Kill !!"
+		"sound"		"quake/multikill.mp3"
+		"streak"	"1"
+	}
+	"MULTIKILL"
+	{
+		"eventkey"	"multikill6"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Sextuple Kill !!"
+		"sound"		"quake/multikill.mp3"
+		"streak"	"1"
+	}
+	"MULTIKILL"
+	{
+		"eventkey"	"multikill7"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Septuple Kill !!"
+		"sound"		"quake/multikill.mp3"
+		"streak"	"1"
+	}
+	"MULTIKILL"
+	{
+		"eventkey"	"multikill8"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Octuple Kill !!"
+		"sound"		"quake/multikill.mp3"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Kamikaze"
+		"sound"		"quake/banzai.mp3"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad2"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Kamikaze X2"
+		"sound"		"quake/multibanzai.mp3"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad3"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Kamikaze X3"
+		"sound"		"quake/multibanzai.mp3"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad4"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Kamikaze X4"
+		"sound"		"quake/multibanzai.mp3"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad5"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Kamikaze X5"
+		"sound"		"quake/multibanzai.mp3"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad6"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Kamikaze X6"
+		"sound"		"quake/multibanzai.mp3"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad7"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Kamikaze X7"
+		"sound"		"quake/multibanzai.mp3"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad8"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Kamikaze X8"
+		"sound"		"quake/multibanzai.mp3"
+		"streak"	"1"
+	}
+	"POST_MORTEM"
+	{
+		"eventkey"	"post_mortem"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Post Mortem"
+		"sound"		"quake/ownage.mp3"
+		"streak"	"1"
+	}
+	"POST_MORTEM"
+	{
+		"eventkey"	"post_mortem"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Validus Post Mortem"
+		"sound"		"quake/validus.mp3"
+		"streak"	"0"
+	}
+	"SIMULTANEOUS"
+	{
+		"eventkey"	"simultaneous"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a and %v Simultaneous Kill"
+		"sound"		"quake/megakill.mp3"
+		"streak"	"1"
+	}
+	"HUMILIATION"
+	{
+		"eventkey"	"humiliation"
+		"type"		"kill"
+		"weapon"	"weapon_stunstick"
+		"mode"		"1"
+		"text"		"%v Humiliated by %a"
+		"sound"		"quake/humiliation.mp3"
+		"streak"	"1"
+	}
+	"HUMILIATION"
+	{
+		"eventkey"	"humiliation"
+		"type"		"kill"
+		"weapon"	"weapon_stunstick"
+		"mode"		"1"
+		"text"		"%a Especial Donativum"
+		"sound"		"quake/donativum.mp3"
+		"streak"	"0"
+	}
+	"TEAM_KILL"
+	{
+		"eventkey"	"team_kill"
+		"type"		"kill"
+		"mode"		"1"
+		"text"		"%a Team Killer"
+		"sound"		"quake/teamkiller.mp3"
+		"streak"	"1"
+	}
+	"HEADSHOT"
+	{
+		"eventkey"	"headshot"
+		"type"		"death"
+		"weapon"	"357"
+		"streak"	"1"
+	}
+	
+	"HEADSHOT"
+	{
+		"eventkey"	"headshot"
+		"type"		"death"
+		"weapon"	"357"
+		"streak"	"0"
+	}
+	"FIRST_BLOOD"
+	{
+		"type"		"death"
+		"streak"	"0"
+	}
+	"MULTIKILL"
+	{
+		"eventkey"	"multikill"
+		"type"		"death"
+		"streak"	"1"
+	}
+	"JIHAD"
+	{
+		"eventkey"	"jihad"
+		"type"		"death"
+		"streak"	"1"
+	}
+	"POST_MORTEM"
+	{
+		"eventkey"	"post_mortem"
+		"type"		"death"
+		"streak"	"1"
+	}
+	"POST_MORTEM"
+	{
+		"eventkey"	"post_mortem"
+		"type"		"death"
+		"streak"	"0"
+	}
+	"HUMILIATION"
+	{
+		"eventkey"	"humiliation"
+		"type"		"death"
+		"weapon"	"weapon_stunstick"
+		"streak"	"1"
+	}
+	"HUMILIATION"
+	{
+		"eventkey"	"humiliation"
+		"type"		"death"
+		"weapon"	"weapon_stunstick"
+		"streak"	"0"
+	}
+	"TEAM_KILL"
+	{
+		"eventkey"	"team_kill"
+		"type"		"death"
+		"streak"	"1"
+	}
+}

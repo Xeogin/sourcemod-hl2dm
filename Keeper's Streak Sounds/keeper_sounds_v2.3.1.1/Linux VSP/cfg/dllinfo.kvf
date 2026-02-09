@@ -1,0 +1,31 @@
+// Updated by Loki 11/29/24: http://forum.tsgk.com/viewtopic.php?p=89470#89470
+// This file is necessary for keeper_sounds plugin ( > v1.40 ) to run properly
+// Place in your cfg directory
+
+//Windows
+//"DLL_INFO"
+//{
+//   "vfuncoffsets"
+//   {
+//      "TraceAttack"   "62"
+//      "Event_Killed"   "68"
+//      "FireBullets"   "114"
+//      "OnTakeDamage"   "64"
+//      "Impulse"   "372"
+//      "Spawn"   "24"
+//   }
+//}
+
+//Linux
+"DLL_INFO"
+{
+   "vfuncoffsets"
+   {
+      "TraceAttack"   "63"
+      "Event_Killed"   "69"
+      "FireBullets"   "115"
+      "OnTakeDamage"   "65"
+      "Impulse"   "373"
+      "Spawn"   "25"
+   }
+}
