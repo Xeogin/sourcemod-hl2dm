@@ -1,0 +1,423 @@
+"Phrases"
+{
+    "sound mixed"
+    {
+        "de"            "Zufällige Sounds"
+        "en"            "Mixed Sounds"
+        "fr"            "Sons mélangés"
+        "pt"            "Sons Misturados"
+        "ru"            "Смешанные звуки"
+    }
+    "enabled"
+    {
+        "de"            "Aktiviert"
+        "en"            "Enabled"
+        "fr"            "Activé"
+        "pt"            "Ativado"
+        "ru"            "Включено"
+    }
+    "headshot"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Kopfschuss"
+        "en"            "{1} Headshot"
+        "fr"            "{1} aime les grosses têtes !!"
+        "pt"            "{1} conseguiu um Tiro na Cabeça"
+        "ru"            "{1}: Хэдшот!"
+    }
+    "headshot 1"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Kopfschuss"
+        "en"            "{1} Headshot"
+        "fr"            "{1} aime les grosses têtes !!"
+        "pt"            "{1} conseguiu um Tiro na Cabeça"
+        "ru"            "{1}: Хэдшот!"
+    }
+    "headshot 3"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Hattrick"
+        "en"            "{1} Hattrick"
+        "fr"            "{1} Tour du chapeau"
+        "pt"            "{1} tem Habilidade com Cabeças"
+        "ru"            "{1} бесподобен!"
+    }
+    "headshot 5"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Kopfjäger"
+        "en"            "{1} Head Hunter"
+        "fr"            "{1} Chasseur de Tête"
+        "pt"            "{1} Caçador de Cabeças"
+        "ru"            "{1} — охотник за головами!"
+    }
+    "killsound 4"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} dominiert"
+        "en"            "{1} is Dominating"
+        "fr"            "{1} maitrise grave !!"
+        "pt"            "{1} está Dominando!"
+        "ru"            "{1} доминирует!"
+    }
+    "killsound 6"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} randaliert"
+        "en"            "{1} is on Rampage"
+        "fr"            "{1} déchire tout !!"
+        "pt"            "{1} está Violento!"
+        "ru"            "{1} буйствует!"
+    }
+    "killsound 8"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} ist auf einem Amoklauf"
+        "en"            "{1} is on a Killing Spree"
+        "fr"            "{1} est bien le meilleur !!"
+        "pt"            "{1} está em uma Matança!"
+        "ru"            "{1} рвёт и мечет!"
+    }
+    "killsound 10"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} hat einen Monster Kill"
+        "en"            "{1} just got a Monster Kill"
+        "fr"            "{1} invente des frags !!"
+        "pt"            "{1} está numa Matança Monstruosa!"
+        "ru"            "{1}: Монстро-килл!"
+    }
+    "killsound 12"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} hat einen Mega Kill"
+        "en"            "{1} just got a Mega Kill"
+        "fr"            "{1} vient de faire un Méga Kill !!"
+        "pt"            "{1} acabou de conseguir uma Mega Matança!"
+        "ru"            "{1}: Мега-килл!"
+    }
+    "killsound 14"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} ist nicht aufzuhalten"
+        "en"            "{1} is Unstoppable"
+        "fr"            "{1} est intenable !!"
+        "pt"            "{1} não PÁRA!!"
+        "ru"            "{1} неудержим!"
+    }
+    "killsound 16"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Ultrakill"
+        "en"            "{1} Ultrakill"
+        "fr"            "{1} va tous les dégouter !!"
+        "pt"            "{1} é um Assassino Profissional!"
+        "ru"            "{1} невероятен!"
+    }
+    "killsound 18"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} gleicht einem Gott"
+        "en"            "{1} is Godlike"
+        "fr"            "{1}, Dieu est sur terre !!"
+        "pt"            "{1} é como um DEUS!"
+        "ru"            "{1} подобен Богу!"
+    }
+    "killsound 20"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} ist ernsthaft krank im Kopf"
+        "en"            "{1} is Wicked Sick"
+        "fr"            "{1} est un Foufou !!"
+        "pt"            "{1} está com uma Doença Vingativa!"
+        "ru"            "{1} просто безумец!"
+    }
+    "killsound 22"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} ist beeindruckend"
+        "en"            "{1} is Impressive"
+        "fr"            "{1} est impressionnant !!"
+        "pt"            "{1} é Impressionante!"
+        "ru"            "{1} впечатляет!"
+    }
+    "killsound 24"
+    {
+        "#format"        "{1:s}"
+        "de"            "Irsinniger Kill von {1}"
+        "en"            "Ludicrous Kill by {1}"
+        "fr"            "{1} est mort de rire !!"
+        "pt"            "Genocídio Absurdo por {1}"
+        "ru"            "Невероятное убийство игроком {1}"
+    }
+    "killsound 26"
+    {
+        "#format"        "{1:s}"
+        "de"            "Heilige Scheiße, {1} ist wahnsinnig"
+        "en"            "HOLY SHIT, {1} is a bad ass"
+        "fr"            "Incroyable, {1}; quel mauvais garçon"
+        "pt"            "Puta Merda, {1} é muito foda!"
+        "ru"            "ЧЕРТ ПОДЕРИ, {1} надрал задницу!"
+    }
+    "combo 2"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} hat gerade zwei auf einmal niedergestreckt"
+        "en"            "{1} just pulled off a Double Kill"
+        "fr"            "{1} vient d'en tuer 2 de suite"
+        "pt"            "{1} acabou de conseguir uma Morte Dupla"
+        "ru"            "{1}: Двойной килл!"
+    }
+    "combo 3"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} hat gerade drei auf einmal niedergestreckt"
+        "en"            "{1} just pulled off a Triple Kill"
+        "fr"            "{1} vient d'en tuer 3 de suite"
+        "pt"            "{1} acabou de conseguir uma Morte Tripla"
+        "ru"            "{1}: Тройной килл!"
+    }
+    "combo 4"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} hat gerade vier auf einmal niedergestreckt"
+        "en"            "{1} just pulled off a Quadruple Combo"
+        "fr"            "{1} vient de faire un Quadruple Combo"
+        "pt"            "{1} acabou de conseguir uma Morte Quádrupla"
+        "ru"            "{1} пробил четверых кряду!"
+    }
+    "combo 5"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} ist eine Comboschlampe"
+        "en"            "{1} is a Combo Whore"
+        "fr"            "{1} est une putain du combo"
+        "pt"            "{1} é o Mestre dos Combos!"
+        "ru"            "{1} вышибает Комбо!"
+    }
+    "combo 6"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} hat einen Mega Kill"
+        "en"            "{1} just got a Mega Kill"
+        "fr"            "{1} vient de faire un Méga Kill !!"
+        "pt"            "{1} acabou de conseguir uma Mega Matança!"
+        "ru"            "{1}: Мега-килл!"
+    }
+    "first blood"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Erstes Blut vergossen"
+        "en"            "{1} got First Blood"
+        "fr"            "{1} a fait la 1ère victime!"
+        "pt"            "{1} conseguiu o Primeiro Sangue!"
+        "ru"            "{1} пролил первую кровь!"
+    }
+    "grenade"
+    {
+        "#format"        "{1:s},{2:s}"
+        "de"            "{1} sprengte {2} mit einer Granate"
+        "en"            "{1} detonated {2} with a grenade"
+        "fr"            "{1} explose {2} avec une grenade"
+        "pt"            "{1} detonou {2} com uma granada"
+        "ru"            "{1} взорвал {2} гранатой"
+    }
+    "selfkill"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} hat sich selbst erniedrigt"
+        "en"            "{1} humiliated himself"
+        "fr"            "{1} s’humilie lui-même"
+        "pt"            "{1} se humilhou"
+        "ru"            "{1} унизил себя"
+    }
+    "round play"
+    {
+        "de"            "Spielt"
+        "en"            "Play"
+        "fr"            "Prépare toi !!"
+        "pt"            "Bom Jogo!"
+        "ru"            "К бою, Спартанцы!"
+    }
+    "knife"
+    {
+        "#format"        "{1:s},{2:s}"
+        "de"            "{2} wurde durch einen Messerkill von {1} bloßgestellt"
+        "en"            "{2} was embarrassed with the knife by {1}"
+        "fr"            "{2} découpé par {1}"
+        "pt"            "{2} foi humilhado com uma faca por {1}"
+        "ru"            "{2} был зарезан {1}"
+    }
+    "teamkill"
+    {
+        "#format"        "{1:s},{2:s}"
+        "de"            "{1} hat gerade seinen Teamkamerad {2} niedergestreckt"
+        "en"            "{1} just victimized his teammate {2}"
+        "fr"            "{1} a tué son pote {2}"
+        "pt"            "{1} acabou de matar o amigo {2}"
+        "ru"            "{1} добил напарника {2}"
+    }
+    "announce message"
+    {
+        "de"            "Tippe !quake oder /quake um deine Quake Sounds einzustellen"
+        "en"            "Say !quake or /quake to set your quake sounds preferences"
+        "fr"            "Tapez !quake ou /quake pour enregistrer vos préférences"
+        "pt"            "Digite !quake ou /quake para configurar Sons Quake"
+        "ru"            "Напишите !quake или /quake для настройки звуков"
+    }
+    "quake menu"
+    {
+        "de"            "Quake Menü"
+        "en"            "Quake Menu"
+        "fr"            "Menu Quake"
+        "pt"            "Menu Quake"
+        "ru"            "Меню Quake"
+    }
+    "enable text"
+    {
+        "de"            "Text Anzeige aktivieren"
+        "en"            "Enable Text Display"
+        "fr"            "Utilisez l'affichage des textes"
+        "pt"            "Ativar Anúncios de Texto"
+        "ru"            "Включить текст"
+    }
+    "disable text"
+    {
+        "de"            "Text Anzeige deaktivieren"
+        "en"            "Disable Text Display"
+        "fr"            "Enlevez l'affichage des textes"
+        "pt"            "Desativar Anúncios de Texto"
+        "ru"            "Отключить текст"
+    }
+    "no quake sounds"
+    {
+        "de"            "Keine Quake Sounds"
+        "en"            "No Quake Sounds"
+        "fr"            "Aucun sons Quake"
+        "pt"            "Sem Sons Quake"
+        "ru"            "Без звуков"
+    }
+    "standard"
+    {
+        "de"            "Standard-Stimme"
+        "en"            "Standard Voice"
+        "fr"            "Voix standard"
+        "pt"            "Voz Padrão"
+        "ru"            "Стандартный голос"
+    }
+    "female"
+    {
+        "de"            "Weibliche Stimme"
+        "en"            "Female Voice"
+        "fr"            "Voix de femme"
+        "pt"            "Voz Feminina"
+        "ru"            "Женский голос"
+    }
+    "male"
+    {
+        "de"            "Männliche Stimme"
+        "en"            "Male Voice"
+        "fr"            "Voix d'homme"
+        "pt"            "Voz Masculina"
+        "ru"            "Мужской голос"
+    }
+    "hl2"
+    {
+        "de"            "Half-Life 2"
+        "en"            "Half-Life 2"
+        "fr"            "Half-Life 2"
+        "pt"            "Half-Life 2"
+        "ru"            "Half-Life 2"
+    }
+    "hl2_killsound 4"
+    {
+        "#format"    "{1:s}"
+        "de"         "{1} macht das ausgezeichnet"
+        "en"         "{1} is doing excellent"
+        "fr"         "{1} se débrouille à merveille"
+        "pt"         "{1} está indo excelente"
+        "ru"         "{1} справляется отлично"
+    }
+    "hl2_killsound 6"
+    {
+        "#format"    "{1:s}"
+        "de"         "{1} macht das fantastisch"
+        "en"         "{1} is doing fantastic"
+        "fr"         "{1} est fantastique"
+        "pt"         "{1} está fantástico"
+        "ru"         "{1} просто фантастика"
+    }
+    "hl2_killsound 8"
+    {
+        "#format"    "{1:s}"
+        "de"         "Alle Wetter {1}"
+        "en"         "Great Scott {1}"
+        "fr"         "Nom de Zeus {1}"
+        "pt"         "Caramba {1}"
+        "ru"         "Боже мой, {1}"
+    }
+    "hl2_killsound 10"
+    {
+        "#format"    "{1:s}"
+        "de"         "{1} wird immer besser!"
+        "en"         "{1} keeps getting better!"
+        "fr"         "{1} ne cesse de s'améliorer!"
+        "pt"         "{1} continua a melhorar!"
+        "ru"         "{1} становится всё лучше!"
+    }
+    "hl2_killsound 12"
+    {
+        "#format"    "{1:s}"
+        "de"         "{1} hat meine Erwartungen erfüllt"
+        "en"         "{1} has gotten my satisfaction"
+        "fr"         "{1} me donne satisfaction"
+        "pt"         "{1} me deixou satisfeito"
+        "ru"         "{1} оправдал мои ожидания"
+    }
+    "hl2_killsound 14"
+    {
+        "#format"    "{1:s}"
+        "de"         "{1} macht große Fortschritte"
+        "en"         "{1} is making major strides"
+        "fr"         "{1} fait de grands progrès"
+        "pt"         "{1} está fazendo grandes progressos"
+        "ru"         "{1} делает большие успехи"
+    }
+    "hl2_killsound 16"
+    {
+        "#format"    "{1:s}"
+        "de"         "{1} hat die Hölle entfesselt!"
+        "en"         "{1} has stirred up Hell!"
+        "fr"         "{1} a déchaîné l'enfer!"
+        "pt"         "{1} despertou o inferno!"
+        "ru"         "{1} разверз преисподнюю!"
+    }
+    "hl2_grenade"
+    {
+        "#format"    "{1:s},{2:s}"
+        "de"         "Meine Güte! {1} hat {2} mit einer Granate gesprengt"
+        "en"         "Goodness! {1} blew up {2} with a nade"
+        "fr"         "Mon Dieu! {1} a fait sauter {2} avec une grenade"
+        "pt"         "Meu Deus! {1} explodiu {2} com uma granada"
+        "ru"         "Боже правый! {1} взорвал {2} гранатой"
+    }
+    "hl2_selfkill"
+    {
+        "#format"    "{1:s}"
+        "de"         "{1} hat sich wie ein Narr selbst getötet!"
+        "en"         "{1} killed themselves like a fool!"
+        "fr"         "{1} s'est tué comme un idiot!"
+        "pt"         "{1} se matou como um idiota!"
+        "ru"         "{1} убил себя как дурак!"
+    }
+    "hl2_knife"
+    {
+        "#format"    "{1:s},{2:s}"
+        "de"         "{2} wurde von {1} brutal zu Tode geprügelt"
+        "en"         "{2} was brutally beaten to death by {1}"
+        "fr"         "{2} a été brutalement battu à mort par {1}"
+        "pt"         "{2} foi brutalmente espancado até a morte por {1}"
+        "ru"         "{2} забит до смерти игроком {1}"
+    }
+}
