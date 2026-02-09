@@ -1,5 +1,3 @@
-This page hosts my public Sourcemod plugins for [Half-Life 2 Deathmatch](https://store.steampowered.com/app/320/HalfLife_2_Deathmatch/) servers. These were originally created for Australian Deathmatch
-
 * [xFix](#xFix) - Fixes various game bugs/exploits/annoyances (previously called hl2dmfix)
 * [XMS](#XMS) - eXtended Match System for competitive servers
   * [xms_bots](#xms_bots) - RCBot2 controller for XMS servers
