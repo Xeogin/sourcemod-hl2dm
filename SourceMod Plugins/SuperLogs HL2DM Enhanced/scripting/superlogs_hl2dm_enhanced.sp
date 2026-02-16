@@ -10,7 +10,7 @@
 #include <sdktools>
 #include <sdkhooks>
 
-#define PLUGIN_VERSION "2.2"
+#define PLUGIN_VERSION "2.3"
 
 // --- Hitgroup Definitions ---
 #define HITGROUP_HEAD       1
@@ -33,7 +33,7 @@
 #define LOG_HIT_RIGHTLEG    14
 #define STATS_COUNT         15
 
-// Fully Expanded Weapon List for HL2DM (Excluding Bugbait)
+// Weapon List
 #define WEAPON_COUNT 14
 char g_szWeaponList[WEAPON_COUNT][] = { 
     "crossbow_bolt", "smg1", "357", "shotgun", "ar2", "pistol", 
@@ -44,21 +44,18 @@ char g_szWeaponList[WEAPON_COUNT][] = {
 // Globals
 int g_iWeaponStats[MAXPLAYERS+1][WEAPON_COUNT][STATS_COUNT];
 StringMap g_hWeaponMap;
-
-// Tracking
 int g_iNextHitgroup[MAXPLAYERS+1];
 int g_iNextBowHitgroup[MAXPLAYERS+1];
 int g_iOwnerOffset = -1;
 Handle g_hBoltStack = INVALID_HANDLE;
 
-// CVars
 ConVar g_cvar_headshots;
 ConVar g_cvar_locations;
 ConVar g_cvar_teamplay;
 
 public Plugin myinfo = {
     name = "SuperLogs: HL2DM Enhanced",
-    author = "psychonic, gameME, & AI Refinement",
+    author = "psychonic, gameME, & Xeogin",
     description = "Advanced weapon and event logging for HL2DM",
     version = PLUGIN_VERSION,
 };
@@ -80,7 +77,8 @@ public void OnPluginStart() {
     HookEvent("player_death", Event_PlayerDeath, EventHookMode_Post);
     HookEvent("player_spawn", Event_PlayerSpawn);
     HookEvent("round_end", Event_RoundEnd);
-    HookEvent("weapon_fire", Event_WeaponFire);
+
+    // FIX: Removed HookEvent("weapon_fire") as it doesn't exist in HL2DM engine.
 
     for (int i = 1; i <= MaxClients; i++) {
         if (IsClientInGame(i)) OnClientPutInServer(i);
@@ -109,18 +107,6 @@ public void OnGameFrame() {
     }
 }
 
-public void Event_WeaponFire(Event event, const char[] name, bool dontBroadcast) {
-    int client = GetClientOfUserId(event.GetInt("userid"));
-    if (client <= 0 || !IsClientInGame(client)) return;
-
-    char weapon[32];
-    event.GetString("weapon", weapon, sizeof(weapon));
-    int idx = GetMapWeaponIndex(weapon);
-    if (idx != -1 && StrContains(weapon, "pistol") == -1 && StrContains(weapon, "smg") == -1 && StrContains(weapon, "ar2") == -1) {
-        g_iWeaponStats[client][idx][LOG_SHOTS]++;
-    }
-}
-
 public void OnFireBullets(int attacker, int shots, char[] weaponname) {
     if (attacker <= 0 || attacker > MaxClients) return;
     int idx = GetMapWeaponIndex(weaponname);
@@ -144,8 +130,6 @@ public void OnTakeDamage(int victim, int attacker, int inflictor, float damage, 
     if (attacker <= 0 || attacker > MaxClients || victim <= 0 || victim > MaxClients) return;
 
     int idx = -1;
-    char weapon[32];
-    
     if (IsValidEntity(inflictor)) {
         char cls[64];
         GetEntityNetClass(inflictor, cls, sizeof(cls));
@@ -155,6 +139,7 @@ public void OnTakeDamage(int victim, int attacker, int inflictor, float damage, 
     }
 
     if (idx == -1) {
+        char weapon[32];
         GetClientWeapon(attacker, weapon, sizeof(weapon));
         idx = GetMapWeaponIndex(weapon);
     }
