@@ -5,22 +5,29 @@
 
 enum struct _gConVar
 {
-    ConVar g_cTimeleftX;
-    ConVar g_cTimeleftY;
-    ConVar g_cTimeleftR;
-    ConVar g_cTimeleftG;
-    ConVar g_cTimeleftB;
-    ConVar g_cTimeleftI;
+    ConVar g_cTimeleftPos;
+    ConVar g_cTimeleftColor;
+    ConVar g_cTimeleftWarnColor;
 }
 _gConVar gConVar;
 
 static const char
     PL_NAME[]        = "Timeleft HUD",
-    PL_AUTHOR[]      = "Peter Brev, Grey83, Xeogin",
-    PL_DESCRIPTION[] = "Provides timeleft on the HUD",
-    PL_VERSION[]     = "1.1.2";
+    PL_AUTHOR[]      = "Peter Brev, Grey83, Gemini+Xeogin",
+    PL_DESCRIPTION[] = "Displays the remaining timeleft on every player's HUD",
+    PL_VERSION[]     = "1.1.3";
 
 Handle hHUD;
+
+// Global optimized cache variables
+char  g_sCachedText[32];
+int   g_iLastParsedTime = -1;
+
+float g_fPosCodeX = -1.0;
+float g_fPosCodeY = 0.01;
+
+int   g_iColorNormal[3] = {255, 220, 0};
+int   g_iColorWarn[3]   = {255, 0, 0};
 
 public Plugin myinfo =
 {
@@ -42,62 +49,131 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnPluginStart()
 {
-    gConVar.g_cTimeleftX = CreateConVar("sm_timeleft_x", "-1.0", "Position the HUD's timeleft on the X axis");
-    gConVar.g_cTimeleftY = CreateConVar("sm_timeleft_y", "0.01", "Position the HUD's timeleft on the y axis");
-    gConVar.g_cTimeleftR = CreateConVar("sm_timeleft_r", "255", "Red color intensity of the HUD's timeleft", 0, true, 0.0, true, 255.0);
-    gConVar.g_cTimeleftG = CreateConVar("sm_timeleft_g", "220", "Green color intensity of the HUD's timeleft", 0, true, 0.0, true, 255.0);
-    gConVar.g_cTimeleftB = CreateConVar("sm_timeleft_b", "0", "Blue color intensity of the HUD's timeleft", 0, true, 0.0, true, 255.0);
-    gConVar.g_cTimeleftI = CreateConVar("sm_timeleft_i", "255", "Amount of transparency of the HUD's timeleft", 0, true, 0.0, true, 255.0);
+    gConVar.g_cTimeleftPos       = CreateConVar("sm_timeleft_pos", "-1.0,0.01", "HUD screen position coordinates: <X axis>,<Y axis>");
+    gConVar.g_cTimeleftColor     = CreateConVar("sm_timeleft_color", "255,220,0", "Default color of the timer: <Red>,<Green>,<Blue>");
+    gConVar.g_cTimeleftWarnColor = CreateConVar("sm_timeleft_warn_color", "255,0,0", "Warning color under 60 seconds: <Red>,<Green>,<Blue>");
+
+    gConVar.g_cTimeleftPos.AddChangeHook(OnCvarChanged_Position);
+    gConVar.g_cTimeleftColor.AddChangeHook(OnCvarChanged_Colors);
+    gConVar.g_cTimeleftWarnColor.AddChangeHook(OnCvarChanged_Colors);
 
     hHUD = CreateHudSynchronizer();
-    AutoExecConfig();
+    AutoExecConfig(true, "timeleft_hud");
 }
 
 public void OnMapStart()
 {
+    g_iLastParsedTime = -1; 
+    
+    CachePosition();
+    CacheColors();
+
     CreateTimer(1.0, Timer_Countdown, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+}
+
+public void OnCvarChanged_Position(ConVar convar, const char[] oldValue, const char[] newValue)
+{
+    CachePosition();
+}
+
+public void OnCvarChanged_Colors(ConVar convar, const char[] oldValue, const char[] newValue)
+{
+    CacheColors();
+}
+
+void CachePosition()
+{
+    char sPos[32];
+    gConVar.g_cTimeleftPos.GetString(sPos, sizeof(sPos));
+    
+    char sCoord[2][16];
+    if (ExplodeString(sPos, ",", sCoord, sizeof(sCoord), sizeof(sCoord[])) >= 2)
+    {
+        TrimString(sCoord[0]);
+        TrimString(sCoord[1]);
+        g_fPosCodeX = StringToFloat(sCoord[0]);
+        g_fPosCodeY = StringToFloat(sCoord[1]);
+    }
+}
+
+void CacheColors()
+{
+    char sRGBColor[32], sValues[3][16];
+    
+    gConVar.g_cTimeleftColor.GetString(sRGBColor, sizeof(sRGBColor));
+    if (ExplodeString(sRGBColor, ",", sValues, sizeof(sValues), sizeof(sValues[])) >= 3)
+    {
+        g_iColorNormal[0] = StringToInt(sValues[0]);
+        g_iColorNormal[1] = StringToInt(sValues[1]);
+        g_iColorNormal[2] = StringToInt(sValues[2]);
+    }
+
+    gConVar.g_cTimeleftWarnColor.GetString(sRGBColor, sizeof(sRGBColor));
+    if (ExplodeString(sRGBColor, ",", sValues, sizeof(sValues), sizeof(sValues[])) >= 3)
+    {
+        g_iColorWarn[0] = StringToInt(sValues[0]);
+        g_iColorWarn[1] = StringToInt(sValues[1]);
+        g_iColorWarn[2] = StringToInt(sValues[2]);
+    }
 }
 
 public Action Timer_Countdown(Handle timer)
 {
     int time;
-    // GetMapTimeLeft returns false if no time limit is set, 
-    // or time will be 0 if the limit is explicitly disabled.
     if (!GetMapTimeLeft(time) || time <= 0)
     {
         return Plugin_Continue;
     }
 
-    char left[32];
-    if (time > 3599)
+    if (time != g_iLastParsedTime)
     {
-        FormatEx(left, sizeof(left), "%ih %02im", time / 3600, (time / 60) % 60);
-    }
-    else if (time > 59)
-    {
-        FormatEx(left, sizeof(left), "%d:%02d", time / 60, time % 60);
-    }
-    else 
-    {
-        FormatEx(left, sizeof(left), "0:%02d", time);
+        g_iLastParsedTime = time;
+
+        if (time > 3599)
+        {
+            FormatEx(g_sCachedText, sizeof(g_sCachedText), "%ih %02im", time / 3600, (time / 60) % 60);
+        }
+        else if (time > 59)
+        {
+            FormatEx(g_sCachedText, sizeof(g_sCachedText), "%d:%02d", time / 60, time % 60);
+        }
+        else 
+        {
+            FormatEx(g_sCachedText, sizeof(g_sCachedText), "%d", time);
+        }
     }
 
-    SetHudTextParams(
-        gConVar.g_cTimeleftX.FloatValue, 
-        gConVar.g_cTimeleftY.FloatValue, 
-        1.1, 
-        gConVar.g_cTimeleftR.IntValue, 
-        gConVar.g_cTimeleftG.IntValue, 
-        gConVar.g_cTimeleftB.IntValue, 
-        gConVar.g_cTimeleftI.IntValue, 
-        0, 0.0, 0.0, 0.0
-    );
+    float currentY = g_fPosCodeY;
+    int r = g_iColorNormal[0];
+    int g = g_iColorNormal[1];
+    int b = g_iColorNormal[2];
+
+    if (time <= 59)
+    {
+        r = g_iColorWarn[0];
+        g = g_iColorWarn[1];
+        b = g_iColorWarn[2];
+
+        if (time <= 9)
+        {
+            float targetCenter = 0.45;
+            if (g_fPosCodeY < targetCenter)
+            {
+                float totalDistance = targetCenter - g_fPosCodeY;
+                // Shifted window calculation so 9 takes a visible downward step immediately
+                float stepMultiplier = (10.0 - float(time)) / 9.0; 
+                currentY = g_fPosCodeY + (totalDistance * stepMultiplier);
+            }
+        }
+    }
+
+    SetHudTextParams(g_fPosCodeX, currentY, 1.05, r, g, b, 255);
 
     for (int i = 1; i <= MaxClients; i++)
     {
         if (IsClientInGame(i) && !IsFakeClient(i))
         {
-            ShowSyncHudText(i, hHUD, left);
+            ShowSyncHudText(i, hHUD, g_sCachedText);
         }
     }
 

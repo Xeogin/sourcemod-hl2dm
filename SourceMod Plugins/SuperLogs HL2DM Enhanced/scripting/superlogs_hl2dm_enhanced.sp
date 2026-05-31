@@ -1,8 +1,3 @@
-/**
- * Combined Enhanced Logging for HL2DM
- * Credits: Nicholas Hastings (SuperLogs), TTS Oetzel & Goerz GmbH (gameME)
- */
-
 #pragma semicolon 1
 #pragma newdecls required
 
@@ -10,12 +5,8 @@
 #include <sdktools>
 #include <sdkhooks>
 
-#define PLUGIN_VERSION "2.3"
+#define PLUGIN_VERSION "2.6"
 
-// --- Hitgroup Definitions ---
-#define HITGROUP_HEAD       1
-
-// --- Stats Indices ---
 #define LOG_SHOTS           0
 #define LOG_HITS            1
 #define LOG_KILLS           2
@@ -31,9 +22,9 @@
 #define LOG_HIT_RIGHTARM    12
 #define LOG_HIT_LEFTLEG     13
 #define LOG_HIT_RIGHTLEG    14
-#define STATS_COUNT         15
+#define LOG_SKILL_HITS      15 
+#define STATS_COUNT         16
 
-// Weapon List
 #define WEAPON_COUNT 14
 char g_szWeaponList[WEAPON_COUNT][] = { 
     "crossbow_bolt", "smg1", "357", "shotgun", "ar2", "pistol", 
@@ -41,29 +32,25 @@ char g_szWeaponList[WEAPON_COUNT][] = {
     "stunstick", "world"
 };
 
-// Globals
 int g_iWeaponStats[MAXPLAYERS+1][WEAPON_COUNT][STATS_COUNT];
 StringMap g_hWeaponMap;
 int g_iNextHitgroup[MAXPLAYERS+1];
-int g_iNextBowHitgroup[MAXPLAYERS+1];
 int g_iOwnerOffset = -1;
 Handle g_hBoltStack = INVALID_HANDLE;
 
-ConVar g_cvar_headshots;
 ConVar g_cvar_locations;
-ConVar g_cvar_teamplay;
+ConVar g_cvar_skill_velocity;
 
 public Plugin myinfo = {
     name = "SuperLogs: HL2DM Enhanced",
-    author = "psychonic, gameME, & Xeogin",
-    description = "Advanced weapon and event logging for HL2DM",
+    author = "Gemini & Xeogin",
+    description = "Logging with movement-based skill tracking",
     version = PLUGIN_VERSION,
 };
 
 public void OnPluginStart() {
-    g_cvar_headshots = CreateConVar("superlogs_headshots", "1", "Log headshot player actions", 0, true, 0.0, true, 1.0);
-    g_cvar_locations = CreateConVar("superlogs_locations", "1", "Log x/y/z coordinates on death", 0, true, 0.0, true, 1.0);
-    g_cvar_teamplay = FindConVar("mp_teamplay");
+    g_cvar_locations = CreateConVar("superlogs_locations", "1", "Log coordinates on death");
+    g_cvar_skill_velocity = CreateConVar("superlogs_skill_velocity", "150.0", "Velocity threshold for skill hits");
 
     g_iOwnerOffset = FindSendPropInfo("CCrossbowBolt", "m_hOwnerEntity");
     g_hBoltStack = CreateStack();
@@ -76,9 +63,6 @@ public void OnPluginStart() {
     HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
     HookEvent("player_death", Event_PlayerDeath, EventHookMode_Post);
     HookEvent("player_spawn", Event_PlayerSpawn);
-    HookEvent("round_end", Event_RoundEnd);
-
-    // FIX: Removed HookEvent("weapon_fire") as it doesn't exist in HL2DM engine.
 
     for (int i = 1; i <= MaxClients; i++) {
         if (IsClientInGame(i)) OnClientPutInServer(i);
@@ -114,21 +98,12 @@ public void OnFireBullets(int attacker, int shots, char[] weaponname) {
 }
 
 public void OnTraceAttack(int victim, int attacker, int inflictor, float damage, int damagetype, int ammotype, int hitbox, int hitgroup) {
-    if (attacker <= 0 || attacker > MaxClients || victim <= 0 || victim > MaxClients) return;
-
-    if (IsValidEntity(inflictor)) {
-        char cls[64];
-        if (GetEntityNetClass(inflictor, cls, sizeof(cls)) && StrEqual(cls, "CCrossbowBolt")) {
-            g_iNextBowHitgroup[victim] = hitgroup;
-            return;
-        }
-    }
-    g_iNextHitgroup[victim] = hitgroup;
+    if (victim > 0 && victim <= MaxClients) g_iNextHitgroup[victim] = hitgroup;
 }
 
 public void OnTakeDamage(int victim, int attacker, int inflictor, float damage, int damagetype) {
     if (attacker <= 0 || attacker > MaxClients || victim <= 0 || victim > MaxClients) return;
-
+    
     int idx = -1;
     if (IsValidEntity(inflictor)) {
         char cls[64];
@@ -146,30 +121,30 @@ public void OnTakeDamage(int victim, int attacker, int inflictor, float damage, 
     
     if (idx == -1) idx = (WEAPON_COUNT - 1);
 
-    int hitgroup = (idx == 0) ? g_iNextBowHitgroup[victim] : g_iNextHitgroup[victim];
+    // Skill Velocity Check
+    float vel[3];
+    GetEntPropVector(attacker, Prop_Data, "m_vecVelocity", vel);
+    if (GetVectorLength(vel) >= g_cvar_skill_velocity.FloatValue) {
+        g_iWeaponStats[attacker][idx][LOG_SKILL_HITS]++;
+    }
+
     g_iWeaponStats[attacker][idx][LOG_HITS]++;
     g_iWeaponStats[attacker][idx][LOG_DAMAGE] += RoundToNearest(damage);
-
-    if (hitgroup >= 0 && hitgroup <= 7) g_iWeaponStats[attacker][idx][LOG_HIT_GENERIC + hitgroup]++;
+    
+    int hg = g_iNextHitgroup[victim];
+    if (hg >= 0 && hg <= 7) g_iWeaponStats[attacker][idx][LOG_HIT_GENERIC + hg]++;
 }
 
 public Action Event_PlayerDeathPre(Event event, const char[] name, bool dontBroadcast) {
     int attacker = GetClientOfUserId(event.GetInt("attacker"));
     int victim = GetClientOfUserId(event.GetInt("userid"));
 
-    if (attacker > 0 && victim > 0 && attacker != victim) {
-        if (g_cvar_locations.BoolValue) {
-            float aPos[3], vPos[3];
-            GetClientAbsOrigin(attacker, aPos);
-            GetClientAbsOrigin(victim, vPos);
-            LogToGame("\"%L\" triggered \"interact\" with \"%L\" (attacker_position \"%d %d %d\") (victim_position \"%d %d %d\")", 
-                attacker, victim, RoundFloat(aPos[0]), RoundFloat(aPos[1]), RoundFloat(aPos[2]), RoundFloat(vPos[0]), RoundFloat(vPos[1]), RoundFloat(vPos[2]));
-        }
-
-        int hitgroup = (g_iNextBowHitgroup[victim] != 0) ? g_iNextBowHitgroup[victim] : g_iNextHitgroup[victim];
-        if (hitgroup == HITGROUP_HEAD && g_cvar_headshots.BoolValue) {
-            LogToGame("\"%L\" triggered \"headshot\" against \"%L\"", attacker, victim);
-        }
+    if (attacker > 0 && victim > 0 && attacker != victim && g_cvar_locations.BoolValue) {
+        float aPos[3], vPos[3];
+        GetClientAbsOrigin(attacker, aPos);
+        GetClientAbsOrigin(victim, vPos);
+        LogToGame("\"%L\" triggered \"interact\" with \"%L\" (attacker_position \"%d %d %d\") (victim_position \"%d %d %d\")", 
+            attacker, victim, RoundFloat(aPos[0]), RoundFloat(aPos[1]), RoundFloat(aPos[2]), RoundFloat(vPos[0]), RoundFloat(vPos[1]), RoundFloat(vPos[2]));
     }
     return Plugin_Continue;
 }
@@ -180,20 +155,14 @@ public void Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast
     char weaponName[32];
     event.GetString("weapon", weaponName, sizeof(weaponName));
     int idx = GetMapWeaponIndex(weaponName);
-
+    
     if (attacker > 0 && attacker != victim && idx != -1) {
         g_iWeaponStats[attacker][idx][LOG_KILLS]++;
         g_iWeaponStats[victim][idx][LOG_DEATHS]++;
-
-        int hitgroup = (g_iNextBowHitgroup[victim] != 0) ? g_iNextBowHitgroup[victim] : g_iNextHitgroup[victim];
-        if (hitgroup == HITGROUP_HEAD) g_iWeaponStats[attacker][idx][LOG_HEADSHOTS]++;
-
-        if (g_cvar_teamplay != null && g_cvar_teamplay.BoolValue && GetClientTeam(attacker) == GetClientTeam(victim)) {
-            g_iWeaponStats[attacker][idx][LOG_TK]++;
-        }
+        if (g_iNextHitgroup[victim] == 1) g_iWeaponStats[attacker][idx][LOG_HEADSHOTS]++;
     }
     if (victim > 0) DumpPlayerStats(victim);
-    g_iNextHitgroup[victim] = 0; g_iNextBowHitgroup[victim] = 0;
+    g_iNextHitgroup[victim] = 0;
 }
 
 int GetMapWeaponIndex(const char[] weapon) {
@@ -208,11 +177,7 @@ int GetMapWeaponIndex(const char[] weapon) {
 
 public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast) {
     int client = GetClientOfUserId(event.GetInt("userid"));
-    if (client > 0) { ResetPlayerStats(client); g_iNextHitgroup[client] = 0; g_iNextBowHitgroup[client] = 0; }
-}
-
-public void Event_RoundEnd(Event event, const char[] name, bool dontBroadcast) {
-    for (int i = 1; i <= MaxClients; i++) if (IsClientInGame(i)) DumpPlayerStats(i);
+    if (client > 0) ResetPlayerStats(client);
 }
 
 void ResetPlayerStats(int client) {
@@ -223,9 +188,9 @@ void DumpPlayerStats(int client) {
     if (!IsClientInGame(client) || IsFakeClient(client)) return;
     for (int i = 0; i < WEAPON_COUNT; i++) {
         if (g_iWeaponStats[client][i][LOG_SHOTS] > 0 || g_iWeaponStats[client][i][LOG_HITS] > 0) {
-            LogToGame("\"%L\" triggered \"weaponstats\" (weapon \"%s\") (shots \"%d\") (hits \"%d\") (kills \"%d\") (headshots \"%d\") (tks \"%d\") (damage \"%d\") (deaths \"%d\")", 
-                client, g_szWeaponList[i], g_iWeaponStats[client][i][LOG_SHOTS], g_iWeaponStats[client][i][LOG_HITS], g_iWeaponStats[client][i][LOG_KILLS], 
-                g_iWeaponStats[client][i][LOG_HEADSHOTS], g_iWeaponStats[client][i][LOG_TK], g_iWeaponStats[client][i][LOG_DAMAGE], g_iWeaponStats[client][i][LOG_DEATHS]);
+            LogToGame("\"%L\" triggered \"weaponstats\" (weapon \"%s\") (shots \"%d\") (hits \"%d\") (skill_hits \"%d\") (kills \"%d\") (headshots \"%d\") (damage \"%d\")", 
+                client, g_szWeaponList[i], g_iWeaponStats[client][i][LOG_SHOTS], g_iWeaponStats[client][i][LOG_HITS], g_iWeaponStats[client][i][LOG_SKILL_HITS], 
+                g_iWeaponStats[client][i][LOG_KILLS], g_iWeaponStats[client][i][LOG_HEADSHOTS], g_iWeaponStats[client][i][LOG_DAMAGE]);
             LogToGame("\"%L\" triggered \"weaponstats2\" (weapon \"%s\") (head \"%d\") (chest \"%d\") (stomach \"%d\") (leftarm \"%d\") (rightarm \"%d\") (leftleg \"%d\") (rightleg \"%d\")", 
                 client, g_szWeaponList[i], g_iWeaponStats[client][i][LOG_HIT_HEAD], g_iWeaponStats[client][i][LOG_HIT_CHEST], g_iWeaponStats[client][i][LOG_HIT_STOMACH], 
                 g_iWeaponStats[client][i][LOG_HIT_LEFTARM], g_iWeaponStats[client][i][LOG_HIT_RIGHTARM], g_iWeaponStats[client][i][LOG_HIT_LEFTLEG], g_iWeaponStats[client][i][LOG_HIT_RIGHTLEG]);

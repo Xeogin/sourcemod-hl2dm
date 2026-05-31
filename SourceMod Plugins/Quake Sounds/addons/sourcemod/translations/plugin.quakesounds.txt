@@ -258,6 +258,16 @@
         "pt"            "{1} acabou de matar o amigo {2}"
         "ru"            "{1} добил напарника {2}"
     }
+    "postmortem"
+    {
+        "#format"       "{1:s}"
+        "en"            "{1} Post-Mortem"
+    }
+    "simultaneous"
+    {
+        "#format"       "{1:s},{2:s}"
+        "en"            "{1} and {2} Simultaneous Kill!"
+    }
     "announce message"
     {
         "de"            "Tippe !quake oder /quake um deine Quake Sounds einzustellen"
@@ -330,6 +340,42 @@
         "pt"            "Half-Life 2"
         "ru"            "Half-Life 2"
     }
+    "hl2_headshot"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Kopfschuss"
+        "en"            "{1} Headshot"
+        "fr"            "{1} aime les grosses têtes !!"
+        "pt"            "{1} conseguiu um Tiro na Cabeça"
+        "ru"            "{1}: Хэдшот!"
+    }
+    "hl2_headshot 1"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Kopfschuss"
+        "en"            "{1} Headshot"
+        "fr"            "{1} aime les grosses têtes !!"
+        "pt"            "{1} conseguiu um Tiro na Cabeça"
+        "ru"            "{1}: Хэдшот!"
+    }
+    "hl2_headshot 3"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Hattrick"
+        "en"            "{1} Hattrick"
+        "fr"            "{1} Tour du chapeau"
+        "pt"            "{1} tem Habilidade com Cabeças"
+        "ru"            "{1} бесподобен!"
+    }
+    "hl2_headshot 5"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Kopfjäger"
+        "en"            "{1} Head Hunter"
+        "fr"            "{1} Chasseur de Tête"
+        "pt"            "{1} Caçador de Cabeças"
+        "ru"            "{1} — охотник за головами!"
+    }
     "hl2_killsound 4"
     {
         "#format"    "{1:s}"
@@ -393,6 +439,15 @@
         "pt"         "{1} despertou o inferno!"
         "ru"         "{1} разверз преисподнюю!"
     }
+    "hl2_first blood"
+    {
+        "#format"        "{1:s}"
+        "de"            "{1} Erstes Blut vergossen"
+        "en"            "{1} got First Blood"
+        "fr"            "{1} a fait la 1ère victime!"
+        "pt"            "{1} conseguiu o Primeiro Sangue!"
+        "ru"            "{1} пролил первую кровь!"
+    }
     "hl2_grenade"
     {
         "#format"    "{1:s},{2:s}"
@@ -419,5 +474,15 @@
         "fr"         "{2} a été brutalement battu à mort par {1}"
         "pt"         "{2} foi brutalmente espancado até a morte por {1}"
         "ru"         "{2} забит до смерти игроком {1}"
+    }
+    "hl2_postmortem"
+    {
+        "#format"       "{1:s}"
+        "en"            "{1} Post-Mortem"
+    }
+    "hl2_simultaneous"
+    {
+        "#format"       "{1:s},{2:s}"
+        "en"            "{1} and {2} Simultaneous Kill!"
     }
 }
